@@ -1,0 +1,23 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<h3>@Title</h3>
+
+<button type="button" class="btn btn-info" @onclick="ModifyTitle">Modify Title</button>
+
+<hr/>
+
+<ChildOneWayBinding MainTitle="@Title" />
+
+<Component BindText="@Title"></Component>
+
+@code{
+    public string Title { get; set; } = "One-Way Binding";
+
+    private void ModifyTitle() => Title = "One-Way Binding Modified";
+}

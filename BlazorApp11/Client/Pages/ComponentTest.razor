@@ -1,0 +1,16 @@
+﻿@page "/componentTest"; 
+
+<h3>ComponentTest</h3>
+
+<InputSelectBox Data="@(new[] {1,2,4,8,12, 16, 20, 24, 32 })" OnSelectedValueChanged="@( x => {ProductCpu = x;} )" @bind-selectedValue="ProductCpu"></InputSelectBox>
+<input type="text" @bind="ProductCpu" />
+
+@code {
+public int ProductCpu { get; set; }
+}
+
+
+
+
+
+

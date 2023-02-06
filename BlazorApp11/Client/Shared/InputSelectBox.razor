@@ -1,0 +1,39 @@
+﻿<select @onchange="OnSelectChanged">
+    <option value=0>직접입력</option>
+    @foreach (var item in Data)
+    {
+        <option value=@item>@item</option>
+    }
+</select>
+<input type="text" @bind-value="selectedValue" @oninput="OnTextChanged" readonly="@isReadOnly" style="@(isReadOnly ? "background-color:darkgray;" : "")" />
+@code 
+{
+    [Parameter] public int[] Data { get; set; }
+    [Parameter] public EventCallback<int> OnSelectedValueChanged { get; set; }
+    private int selectedValue { get; set; }
+    private int value;
+    private bool isReadOnly = false;
+
+    private Task OnSelectChanged(ChangeEventArgs e)
+    {
+        if (Convert.ToInt32(e.Value).Equals(0))
+        {
+            isReadOnly = false;
+        }
+        else
+        {
+            isReadOnly = true;
+            value = Convert.ToInt32(e.Value);
+            selectedValue = Convert.ToInt32(e.Value);
+        }
+
+        OnSelectedValueChanged.InvokeAsync(selectedValue);
+        return Task.CompletedTask;
+    }
+
+    private async Task OnTextChanged(ChangeEventArgs e)
+    {
+        selectedValue = Convert.ToInt32(e.Value);
+        await OnSelectedValueChanged.InvokeAsync(selectedValue);
+    }
+}
