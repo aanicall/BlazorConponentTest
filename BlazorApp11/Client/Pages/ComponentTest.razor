@@ -1,9 +1,30 @@
-﻿@page "/componentTest"; 
+﻿@page "/"; 
 
 <h3>ComponentTest</h3>
 
-<InputSelectBox Data="@(new[] {1,2,4,8,12, 16, 20, 24, 32 })" OnSelectedValueChanged="@( x => {ProductCpu = x;} )" @bind-selectedValue="ProductCpu"></InputSelectBox>
-<input type="text" @bind="ProductCpu" />
+* 유효성 검사 부분이 빠져 현재는 숫자만 입력해 주시기 바랍니다.
+<br /><br />
+
+컴포넌트 : <InputSelectBox Data="@(new[] {1,2,4,8,12, 16, 20, 24, 32 })" OnSelectedValueChanged="@( x => {ProductCpu = x;} )"></InputSelectBox>
+
+<br /><br />
+
+메인 프로퍼티 값 : <input type="text" @bind="ProductCpu" />
+
+
+<br/><br />
+
+1. 컴포넌트의 select 박스의 숫자를 선택하거나 '직접입력'으로 하고 옆의 text박스에 값을 입력하면 컴포넌트의 값이 바뀌고
+아래의 메인 프로퍼티 값도 같이 바인딩 되어 바뀝니다. 
+
+<br /><br />
+
+2. 반대로 메인프로퍼티 값의 text박스를 바꾸면 컴포넌트의 select박스의 항복에 있는 값이면 항목으로 설정이 되고 text박스의 값은
+메인 프로퍼티와 같은 값으로 설정되게 하고자 합니다.
+
+<br /><br />
+
+현재 1번은 동작확인이 되는데 2번을 어떻게 해야 할지 궁금합니다.
 
 @code {
 public int ProductCpu { get; set; }
